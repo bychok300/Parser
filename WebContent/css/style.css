@@ -1,0 +1,60 @@
+@CHARSET "UTF-8";
+body {
+	width: 100%;
+	padding-left: 28%;
+	padding-top: 18%;
+	background-color: rgba(233, 194, 170, 0.41);
+}
+
+
+input#textField{
+width: 30%;
+height: 30px;
+border-radius: 3px;
+border: 3px solid #e9c2aa;
+background-color: #faf2ee;
+padding-left :1%;
+color: #877a91;
+}
+
+input#submitButt{
+	width: 10%;
+	height: 38px;
+	border: 3px solid #e9c2aa;
+	border-radius: 2px;
+	background-color: #e9c2aa;
+	color: #877a91;
+}
+input#submitButt :active{
+	background-color:#d2a88e;
+
+}
+
+input#typeOfTag{
+	
+	width: 15%;
+	height: 30px;
+	border-radius: 3px;
+	border: 3px solid #e9c2aa;
+	background-color: #faf2ee;
+	padding-left :1%;
+	margin-top : 5px;
+	color: #877a91;
+}
+
+input#check{
+	margin-top: 10px;
+	margin-left: 2px;"/>
+	 <div style = "color:#907c91; font-size: small;display:initial;
+}
+div#checkText{
+	color:#907c91;
+	font-size: small;
+	display:initial;
+}
+div#creator{
+	margin-top: 10%;
+	font-size: smaller;
+	color: #989898;
+	margin-left: 13%;
+}
