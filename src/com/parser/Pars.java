@@ -24,6 +24,7 @@ import org.jsoup.select.Elements;
 @WebServlet(urlPatterns = "/Parse", description = "Simple parser by Bychek Anton")
 public class Pars extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,8 +43,13 @@ public class Pars extends HttpServlet {
 		//берем наш checkbox
 		final String toText = request.getParameter("textOrHtml");
 		
+		//take another check box
+		final String withOutHtml = request.getParameter("only_text");
+		
 		//добавляем вывод в файлик
 		final String fileName = "/usr/local/eclipse/workspace/Parser/WebContent/outPutFile/output.html";
+		
+		
 		/***
 		 * подключаемся к Jsoup и парсим введеный параметр на клиенте
 		 * и все это выкладываем в файлик
@@ -52,8 +58,9 @@ public class Pars extends HttpServlet {
         try (final BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
         	//конектимся
             final Document doc = Jsoup.connect("http://" + parserParam).get();
-            //добавляем в список из элементов все что лежит между тегами <html> </html>
+            //добавляем в список из элементов все что лежит между тегами 
             Elements elements = doc.select(parsTag);
+            
             
             //записываем в файлик
             writer.write(doc.outerHtml());
@@ -62,14 +69,18 @@ public class Pars extends HttpServlet {
             /***Если стоит галка - текст
              *  выводим на клиента все что спарсилось в плэйн тексте
              *  иначе, выводим просто в хтмл
+             *  eсли стоит галка на  withoutHTML то убираем все теги и оставляем только текст
              * 	*/
             if (toText != null){
-            	out.print("<plaintext>" +elements + "</plaintext>");
+            	out.print("<plaintext>" + elements + "</plaintext>");
 
             }
-            else{
-            	//System.out.println(jsonOut);
-            	out.print(elements);  
+            else if (withOutHtml != null) {
+            	//System.out.println();
+            	out.print(elements.text());  
+            }
+            else {
+            	out.print(elements);
             }
         }
         //перехватываем исключение если че
@@ -81,7 +92,6 @@ public class Pars extends HttpServlet {
 		out.close();
 	 
 	}
-	
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
